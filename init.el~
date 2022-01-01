@@ -40,6 +40,8 @@
   :demand t
   :bind (("<escape>" . keyboard-escape-quit))
   :init
+  ;; allows for using cgn
+  ;; (setq evil-search-module 'evil-search)
   (setq evil-want-keybinding nil)
   ;; no vim insert bindings
   (setq evil-undo-system 'undo-fu)
@@ -52,6 +54,7 @@
 (define-key evil-motion-state-map (kbd "SPC w j") 'evil-window-down)
 (define-key evil-motion-state-map (kbd "SPC w k") 'evil-window-up)
 (define-key evil-motion-state-map (kbd "SPC w l") 'evil-window-right)
+(define-key evil-motion-state-map (kbd "SPC g g") 'evil-collection-magit-toggle-text-minor-mode)
 
 ;;; Vim Bindings Everywhere else
 (use-package evil-collection
@@ -122,7 +125,7 @@
  '(custom-safe-themes
    '("16ab866312f1bd47d1304b303145f339eac46bbc8d655c9bfa423b957aa23cc9" "cf9414f229f6df728eb2a5a9420d760673cca404fee9910551caf9c91cff3bfa" default))
  '(package-selected-packages
-   '(rainbow-delimiters ivy-rich magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
+   '(ivy-rich magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
