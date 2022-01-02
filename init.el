@@ -8,8 +8,6 @@
 (set-fringe-mode 8)       ; Give some breathing room
 (menu-bar-mode -1)            ; Disable the menu bar
 
-(load-theme 'wombat)
-
 ;;; Startup
 ;;; PACKAGE LIST
 (setq package-archives 
@@ -42,13 +40,6 @@
   (setq evil-undo-system 'undo-fu)
   :config
   (evil-mode 1))
-
-(define-key evil-motion-state-map " " nil)
-
-;; (define-key evil-motion-state-map (kbd "SPC w h") 'evil-window-left)
-;; (define-key evil-motion-state-map (kbd "SPC w j") 'evil-window-down)
-;; (define-key evil-motion-state-map (kbd "SPC w k") 'evil-window-up)
-;; (define-key evil-motion-state-map (kbd "SPC w l") 'evil-window-right)
 
 ;;; Vim Bindings Everywhere else
 (use-package evil-collection
@@ -99,9 +90,6 @@
     (setq projectile-project-search-path '("~/Dev")))
   (setq projectile-switch-project-action #'projectile-dired))
 
-;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
 	 ("C-x b" . counsel-ibuffer)
@@ -116,7 +104,17 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package doom-themes)
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-outrun-electric t)
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 
 ;; Fresh install requires: M-x all-the-icons-install-fonts
 (use-package all-the-icons)
@@ -154,7 +152,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("16ab866312f1bd47d1304b303145f339eac46bbc8d655c9bfa423b957aa23cc9" "cf9414f229f6df728eb2a5a9420d760673cca404fee9910551caf9c91cff3bfa" default))
+   '("da53441eb1a2a6c50217ee685a850c259e9974a8fa60e899d393040b4b8cc922" "16ab866312f1bd47d1304b303145f339eac46bbc8d655c9bfa423b957aa23cc9" "cf9414f229f6df728eb2a5a9420d760673cca404fee9910551caf9c91cff3bfa" default))
  '(notmuch-search-line-faces
    '(("unread" :foreground "#aeee00")
      ("flagged" :foreground "#0a9dff")
