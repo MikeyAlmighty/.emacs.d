@@ -1,6 +1,8 @@
 ;; COCKPIT
 (setq inhibit-startup-message t)
 
+(setq evil-want-C-u-scroll t)
+
 ;; Declutter Frame/Window space
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
@@ -122,7 +124,7 @@
  '(custom-safe-themes
    '("16ab866312f1bd47d1304b303145f339eac46bbc8d655c9bfa423b957aa23cc9" "cf9414f229f6df728eb2a5a9420d760673cca404fee9910551caf9c91cff3bfa" default))
  '(package-selected-packages
-   '(rainbow-delimiters ivy-rich magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
+   '(doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
