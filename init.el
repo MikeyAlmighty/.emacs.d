@@ -82,7 +82,10 @@
 
 (use-package projectile
   :diminish projectile-mode
-  :config (projectile-mode)
+  :config
+  (projectile-mode)
+  :custom
+  (projectile-completion-system 'ivy)
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
@@ -96,6 +99,13 @@
 	 ("C-x C-f" . counsel-find-file)
 	 :map minibuffer-local-map
 	 ("C-r" . counsel-minibuffer-history)))
+
+;; Requires ag to be installed on the system (https://github.com/ggreer/the_silver_searcher)
+(use-package ag)
+
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
 
 (use-package ivy-rich
   :init
@@ -128,19 +138,28 @@
     :prefix "SPC"
     :global-prefix "C-SPC"))
 
+(use-package org-roam
+  :ensure t)
+
+(setq org-roam-directory "~/Dev/read-me/cerebrum")
+
 (mikey/leader-keys
   "g"  '(:ignore g :which-key "Magit")
-  "gg" '(magit-status-here :which-key "Status")
-  "gl" '(magit-log-all :which-key "Log")
-  "p"  '(:ignore p :which-key "Projects")
+  "gg" '(magit-status-here :which-key "Magit Status")
+  "gl" '(magit-log-all :which-key "Magit Log")
+  "p"  '(:ignore p :which-key "Project")
   "pa" '(projectile-add-known-project :which-key "Add Project")
   "ps" '(projectile-switch-project :which-key "Switch Project")
+  "pq" '(counsel-projectile-ag :which-key "Search Project")
   "pf" '(projectile-find-file :which-key "Find File")
   "w"  '(:ignore w :which-key "Window")
-  "wh" '(evil-window-left :which-key "Left")
-  "wl" '(evil-window-right :which-key "Right")
-  "wk" '(evil-window-up :which-key "Up")
-  "wj" '(evil-window-down :which-key "Down"))
+  "wh" '(evil-window-left :which-key "Move Window Left")
+  "wl" '(evil-window-right :which-key "Move Window Right")
+  "wk" '(evil-window-up :which-key "Move Window Up")
+  "wj" '(evil-window-down :which-key "Move Window Down")
+  "n"  '(:ignore w :which-key "Notes")
+  "ni" '(org-roam-node-insert :which-key "Insert Node")
+  "nf" '(org-roam-node-find :which-key "Find Nodes"))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -158,7 +177,7 @@
      ("flagged" :foreground "#0a9dff")
      ("deleted" :foreground "#ff2c4b" :bold t)))
  '(package-selected-packages
-   '(evil-magit general evil-leader all-the-icons doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
+   '(org-roam ag counsel-projectile evil-magit general evil-leader all-the-icons doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
