@@ -73,7 +73,7 @@
   :diminish which-key-mode
   :config
   (which-key-mode t)
-  (setq which-key-idle-delay 0))
+  (setq which-key-idle-delay 1))
 
 ;; THEME
 (use-package badwolf-theme
