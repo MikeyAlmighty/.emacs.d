@@ -1,17 +1,12 @@
 ;; COCKPIT
 (setq inhibit-startup-message t)
-
-(setq evil-want-C-u-scroll t)
-
+  
 ;; Declutter Frame/Window space
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
 (set-fringe-mode 8)       ; Give some breathing room
 (menu-bar-mode -1)            ; Disable the menu bar
-
-;; Set up the visible bell
-; (setq visible-bell t)
 
 (load-theme 'wombat)
 
@@ -33,9 +28,7 @@
 ;; Vim style undo not needed for emacs 28
 (use-package undo-fu)
 
-(use-package magit
-  :bind ((""))
-  )
+(use-package magit)
 
 ;;; Vim Bindings
 (use-package evil
@@ -43,6 +36,8 @@
   :bind (("<escape>" . keyboard-escape-quit))
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-want-integration t)
+  (setq evil-want-C-u-scroll t)
   ;; no vim insert bindings
   (setq evil-undo-system 'undo-fu)
   :config
@@ -50,16 +45,15 @@
 
 (define-key evil-motion-state-map " " nil)
 
-(define-key evil-motion-state-map (kbd "SPC w h") 'evil-window-left)
-(define-key evil-motion-state-map (kbd "SPC w j") 'evil-window-down)
-(define-key evil-motion-state-map (kbd "SPC w k") 'evil-window-up)
-(define-key evil-motion-state-map (kbd "SPC w l") 'evil-window-right)
+;; (define-key evil-motion-state-map (kbd "SPC w h") 'evil-window-left)
+;; (define-key evil-motion-state-map (kbd "SPC w j") 'evil-window-down)
+;; (define-key evil-motion-state-map (kbd "SPC w k") 'evil-window-up)
+;; (define-key evil-motion-state-map (kbd "SPC w l") 'evil-window-right)
 
 ;;; Vim Bindings Everywhere else
 (use-package evil-collection
   :after evil
   :config
-  (setq evil-want-integration t)
   (evil-collection-init))
 
 (use-package ivy
@@ -96,8 +90,14 @@
   (load-theme 'badwolf t))
 
 (use-package projectile
-  :config
-  (projectile-mode +1))
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/Dev")
+    (setq projectile-project-search-path '("~/Dev")))
+  (setq projectile-switch-project-action #'projectile-dired))
 
 ;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 ;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -118,7 +118,35 @@
 
 (use-package doom-themes)
 
+;; Fresh install requires: M-x all-the-icons-install-fonts
 (use-package all-the-icons)
+
+(use-package general
+  :config
+  (general-evil-setup t)
+
+  (general-create-definer mikey/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC"))
+
+(mikey/leader-keys
+  "g"  '(:ignore g :which-key "Magit")
+  "gg" '(magit-status-here :which-key "Status")
+  "gl" '(magit-log-all :which-key "Log")
+  "p"  '(:ignore p :which-key "Projects")
+  "pa" '(projectile-add-known-project :which-key "Add Project")
+  "ps" '(projectile-switch-project :which-key "Switch Project")
+  "pf" '(projectile-find-file :which-key "Find File")
+  "w"  '(:ignore w :which-key "Window")
+  "wh" '(evil-window-left :which-key "Left")
+  "wl" '(evil-window-right :which-key "Right")
+  "wk" '(evil-window-up :which-key "Up")
+  "wj" '(evil-window-down :which-key "Down"))
+
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 15)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -127,8 +155,12 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("16ab866312f1bd47d1304b303145f339eac46bbc8d655c9bfa423b957aa23cc9" "cf9414f229f6df728eb2a5a9420d760673cca404fee9910551caf9c91cff3bfa" default))
+ '(notmuch-search-line-faces
+   '(("unread" :foreground "#aeee00")
+     ("flagged" :foreground "#0a9dff")
+     ("deleted" :foreground "#ff2c4b" :bold t)))
  '(package-selected-packages
-   '(all-the-icons doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
+   '(evil-magit general evil-leader all-the-icons doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
