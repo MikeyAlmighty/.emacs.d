@@ -141,7 +141,11 @@
 (use-package org-roam
   :ensure t)
 
-(setq org-roam-directory "~/Dev/read-me/cerebrum")
+(use-package rjsx-mode)
+(use-package json-mode)
+(use-package typescript-mode)
+(use-package tide)
+(use-package prettier)
 
 (mikey/leader-keys
   "g"  '(:ignore g :which-key "Magit")
@@ -149,11 +153,13 @@
   "gl" '(magit-log-all :which-key "Magit Log")
   "p"  '(:ignore p :which-key "Project")
   "pa" '(projectile-add-known-project :which-key "Add Project")
+  "pd" '(projectile-remove-known-project :which-key "Remove Project")
   "ps" '(projectile-switch-project :which-key "Switch Project")
   "pq" '(counsel-projectile-ag :which-key "Search Project")
   "pf" '(projectile-find-file :which-key "Find File")
   "w"  '(:ignore w :which-key "Window")
   "wh" '(evil-window-left :which-key "Move Window Left")
+  "wb" '(balance-windows :which-key "Balance Windows")
   "wl" '(evil-window-right :which-key "Move Window Right")
   "wk" '(evil-window-up :which-key "Move Window Up")
   "wj" '(evil-window-down :which-key "Move Window Down")
@@ -161,11 +167,17 @@
   "ni" '(org-roam-node-insert :which-key "Insert Node")
   "nf" '(org-roam-node-find :which-key "Find Nodes")
   "o"  '(:ignore d :which-key "Dired")
-  "o-" '(dired-jump :which-key "Jump"))
+  "o-" '(dired-jump :which-key "Jump")
+  "q"  '(:ignore q :which-key "Comment")
+  "cl" '(comment-line :which-key "Line")
+  "co" '(comment-region :which-key "Region"))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
+
+;; TODO: split branch here
+(setq org-roam-directory "~/Dev/Playground/cerebrum")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -179,7 +191,7 @@
      ("flagged" :foreground "#0a9dff")
      ("deleted" :foreground "#ff2c4b" :bold t)))
  '(package-selected-packages
-   '(org-roam ag counsel-projectile evil-magit general evil-leader all-the-icons doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
+   '(tide prettier typescript-mode json-mode rjsx-mode org-roam ag counsel-projectile evil-magit general evil-leader all-the-icons doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
