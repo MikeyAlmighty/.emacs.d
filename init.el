@@ -51,7 +51,7 @@
   :diminish
   :bind (("C-s" . swiper)
          :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)	
+         ("TAB" . ivy-alt-done)
          ("C-l" . ivy-alt-done)
          ("C-j" . ivy-next-line)
          ("C-k" . ivy-previous-line)
@@ -95,10 +95,10 @@
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
-	 :map minibuffer-local-map
-	 ("C-r" . counsel-minibuffer-history)))
+        ("C-x b" . counsel-ibuffer)
+        ("C-x C-f" . counsel-find-file)
+        :map minibuffer-local-map
+        ("C-r" . counsel-minibuffer-history)))
 
 ;; Requires ag to be installed on the system (https://github.com/ggreer/the_silver_searcher)
 (use-package ag)
@@ -169,7 +169,7 @@
   "p"  '(:ignore p :which-key "Project")
   "pa" '(projectile-add-known-project :which-key "Add Project")
   "pd" '(projectile-remove-known-project :which-key "Remove Project")
-  "ps" '(projectile-switch-project :which-key "Switch Project")
+  "pp" '(projectile-switch-project :which-key "Switch Project")
   "pq" '(counsel-projectile-ag :which-key "Search Project")
   "pf" '(projectile-find-file :which-key "Find File")
   "w"  '(:ignore w :which-key "Window")
