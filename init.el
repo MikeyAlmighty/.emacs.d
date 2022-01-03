@@ -159,7 +159,9 @@
   "wj" '(evil-window-down :which-key "Move Window Down")
   "n"  '(:ignore w :which-key "Notes")
   "ni" '(org-roam-node-insert :which-key "Insert Node")
-  "nf" '(org-roam-node-find :which-key "Find Nodes"))
+  "nf" '(org-roam-node-find :which-key "Find Nodes")
+  "o"  '(:ignore d :which-key "Dired")
+  "o-" '(dired-jump :which-key "Jump"))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
