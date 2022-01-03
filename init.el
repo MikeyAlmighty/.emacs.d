@@ -147,6 +147,21 @@
 (use-package tide)
 (use-package prettier)
 
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (typescript-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+;; optionally
+;; (use-package lsp-ui :commands lsp-ui-mode)
+;; if you are ivy user
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+
 (mikey/leader-keys
   "g"  '(:ignore g :which-key "Magit")
   "gg" '(magit-status-here :which-key "Magit Status")
@@ -191,7 +206,7 @@
      ("flagged" :foreground "#0a9dff")
      ("deleted" :foreground "#ff2c4b" :bold t)))
  '(package-selected-packages
-   '(tide prettier typescript-mode json-mode rjsx-mode org-roam ag counsel-projectile evil-magit general evil-leader all-the-icons doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
+   '(lsp-ivy lsp-mode tide prettier typescript-mode json-mode rjsx-mode org-roam ag counsel-projectile evil-magit general evil-leader all-the-icons doom-themes marginalia helpful magit which-key linum-relative badwolf-theme projectile tron-legacy-theme evil-collection evil undo-fu counsel ivy use-package shrink-path)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
